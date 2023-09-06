@@ -13,17 +13,29 @@ import java.util.List;
 public class EmployeeController {
     private EmployeeService employeeService;
 
+
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
+    //    Build create employee Rest API
     @PostMapping
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
         return new ResponseEntity<Employee>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
+//    Build get all Employee Rest API
     @GetMapping
     public List<Employee> getAllEmployee() {
         return employeeService.getAllEmployee();
     }
+
+//    Build get employee by id
+    @GetMapping("{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") long employeeId) {
+        return new ResponseEntity<>(employeeService.getEmployeeById(employeeId), HttpStatus.OK);
+    }
+
+
+
+
 }
